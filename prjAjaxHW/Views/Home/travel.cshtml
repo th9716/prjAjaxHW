@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "travel";
+}
+
+<h1>travel</h1>
+<div class="d-flex align-content-stretch flex-wrap" id="Card"></div>
+
+
+
+@section Scripts{
+    <script src="~/js/travel.js"></script>
+    <script>
+        console.log(DATAS[0].Name);
+
+        //let datas = emp.employees.map((emp, index, array) => {
+        //    const { name, workYears, salary } = emp; //順序錯繪出不來資料
+        //    return (`<li>${name}-${salary}</li>`)
+        //})
+        //myUL.innerHTML = datas.join("");
+        let card = document.querySelector('#Card');
+        let data = DATAS.map((value, index, array) => {
+            let { Name, Add, Toldescribe, TYWebsite, Website } = value;
+            return (`
+                <div class="card m-2" style="width: 18rem;" >
+                    <div class="card-body" >
+                        <h5 class="card-title">${Name}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${Add}</h6>
+                        <p class="card-text">${Toldescribe}</p>
+                        <a href="${TYWebsite}" class="mt-2">${TYWebsite}</a>
+                        <a href="${Website}" class="mt-2">${Website}</a>
+                    </div>
+                </div>
+                        `)
+        })
+        card.innerHTML = data.join("");
+
+    </script>
+}
