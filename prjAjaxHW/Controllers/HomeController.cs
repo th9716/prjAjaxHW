@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using prjAjaxHW.Models;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
 namespace prjAjaxHW.Controllers
 {
@@ -41,7 +43,7 @@ namespace prjAjaxHW.Controllers
             return View();
         }
 
-
+       
 
     }
 }

@@ -49,21 +49,31 @@
         let btn = document.querySelector('#btn');
         let txt1 = document.querySelector('#txt1');
         let span1 = document.querySelector('#span1');
-        
-       
-
         var xhr=new XMLHttpRequest();
 
         xhr.addEventListener("load",()=>{
             var data =xhr.responseText; //接收資料
-            
-
+            span1.innerHTML=`<p>${data}</p>`;
         })
 
-        xhr.addEventListener("click",()=>{
+        xhr.addEventListener("loadend",()=>{
+            var data = xhr.responseText; //接收資料
+            if(data=="OK"){
+                btn.removeAttribute('disabled');
+            }else{
+                btn.setAttribute('disabled', 'disabled');
+            }
+        })
+
+        txt1.addEventListener("blur", () => {
             xhr.open("GET", `/API/index?name=${txt1.value}`);
             xhr.send();
         })
+        //txt1.addEventListener("blur",()=>{
+        //    xhr.open("POST", `/API/index`);
+        //    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        //    xhr.send(`name=${txt1.value}`);
+        //})
 
 
     </script>
