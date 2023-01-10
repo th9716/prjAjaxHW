@@ -43,7 +43,10 @@ namespace prjAjaxHW.Controllers
             return View();
         }
 
-       
+       public IActionResult addess()
+        {
+            return View();
+        }
 
     }
 }

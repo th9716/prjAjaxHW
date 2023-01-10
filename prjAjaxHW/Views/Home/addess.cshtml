@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "addess";
+}
+
+<h1>address</h1>
+
+<select id="selcity"></select>
+<select id="selsite"></select>
+<select id="selroad"></select>
+
+
+@section Scripts{
+    <script>
+        let selc = document.getElementById("selcity");
+        let sels = document.getElementById("selsite");
+        let selr = document.getElementById("selroad");
+
+        selc.addEventListener('change', () => {loadsite();})
+
+        sels.addEventListener("change", () => { loadroad(); })
+
+        loadcity();
+
+
+        async function loadcity() {
+            const response = await fetch("@Url.Content("~/api/city")");
+            const datas = await response.json();
+            const cityopt = datas.map(value => `<option value=${value}>${value}</option>`)
+            selc.innerHTML = cityopt.join("");
+                loadsite()
+        }
+
+        async function loadsite() {
+            const city = selc.options[selc.selectedIndex].value;
+            const response = await fetch(`@Url.Content("~/api/site?city=${city}")`);
+            const datas = await response.json();
+            const siteopt = datas.map(value => `<option value=${value}>${value}</option>`)
+            sels.innerHTML = siteopt.join("");
+                loadroad()
+        }
+
+        async function loadroad() {
+            const site = sels.options[sels.selectedIndex].value;
+            const response = await fetch(`@Url.Content("~/api/road?site=${site}")`);
+            const datas = await response.json();
+            const roadopt = datas.map(value => `<option value=${value}>${value}</option>`)
+            selr.innerHTML = roadopt.join("");
+
+        }
+
+    </script>
+}
